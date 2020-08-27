@@ -2,22 +2,11 @@
 
 ## users テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| nickname | string | null: false |
-| email    | string | null: false |
-| password | string | null: false |
-
-### Association
-
-- has_one :profiles
-- has_many :items
-- has_many :purchases
-
-# profiles テーブル
-
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
+| nickname         | string     | null: false                    |
+| email            | string     | null: false                    |
+| password         | string     | null: false                    |
 | first_name       | string     | null: false                    |
 | family_name      | string     | null: false                    |
 | first_name_kana  | string     | null: false                    |
@@ -25,9 +14,11 @@
 | birthday         | date       | null: false                    |
 | user_id          | references | null: false, foreign_key: true |
 
+
 ### Association
 
-- belongs_to :user
+- has_many :items
+- has_many :purchases
 
 ## items テーブル
 
