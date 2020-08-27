@@ -33,7 +33,6 @@
 | prefecture          | integer    | null: false                    |
 | days_until_shipping | integer    | null: false                    |
 | price               | integer    | null: false                    |
-| trading_status      | boolean    | default: false                 |
 | user_id             | references | null: false, foreign_key: true |
 
 ### Association
