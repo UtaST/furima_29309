@@ -10,7 +10,7 @@
 
 ### Association
 
-- has_one :profiles
+- has_one :profile
 - has_many :items
 - has_many :purchases
 
@@ -23,7 +23,7 @@
 | first_name_kana  | string     | null: false                    |
 | family_name_kana | string     | null: false                    |
 | birthday         | date       | null: false                    |
-| user_id          | references | null: false, foreign_key: true |
+| user             | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -42,20 +42,19 @@
 | prefecture          | integer    | null: false                    |
 | days_until_shipping | integer    | null: false                    |
 | price               | integer    | null: false                    |
-| trading_status      | boolean    | default: false                 |
-| user_id             | references | null: false, foreign_key: true |
+| user                | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one :purchases
+- has_one :purchase
 
 ## purchases テーブル
 
 | Column   | Type       | Options                        |
 | -------- | ---------- | ------------------------------ |
-| user_id  | references | null: false, foreign_key: true |
-| item_id  | references | null: false, foreign_key: true |
+| user     | references | null: false, foreign_key: true |
+| item     | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -70,10 +69,10 @@
 | postal_code   | string     | null: false                    |
 | prefecture    | integer    | null: false                    |
 | city          | string     | null: false                    |
-| house_number  | string     |                                |
+| house_number  | string     | null: false                    |
 | building_name | string     |                                |
 | tell_number   | string     | null: false                    |
-| purchase_id   | references | null: false, foreign_key: true |
+| purchase      | references | null: false, foreign_key: true |
 
 ### Association
 
