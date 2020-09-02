@@ -26,6 +26,10 @@ class ItemsController < ApplicationController
     @purchases = Purchase.all
   end
 
+  def edit
+    @item = Item.find(params[:id])
+  end
+
   private
 
   def item_params
