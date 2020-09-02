@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:destory]
+  before_action :set_item, only: [:destroy]
   def index
     @items = Item.all.order("created_at DESC")
     @purchases = Purchase.all
@@ -27,10 +27,13 @@ class ItemsController < ApplicationController
     @purchases = Purchase.all
   end
 
-  def destory
-    @item.destory
+  def destroy
+    if current_user.id == @item.user_id
+      @item.destroy
+      redirect_to root_path
+    end
   end
-  
+
   private
 
   def item_params
