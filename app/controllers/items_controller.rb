@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
-before_action :set_item, only: [:show, :edit, :update]
-
+  before_action :set_item, only: [:show, :edit, :update]
+  before_action :move_to_session, only:[:edit]
+  before_action :move_to_root, only: [:edit]
   def index
     @items = Item.all.order("created_at DESC")
     @purchases = Purchase.all
@@ -37,6 +38,7 @@ before_action :set_item, only: [:show, :edit, :update]
       render :edit
     end
   end
+
   private
 
   def item_params
@@ -45,5 +47,17 @@ before_action :set_item, only: [:show, :edit, :update]
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def move_to_session
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
+  end
+
+  def move_to_root
+    if current_user.id != @item.user_id
+      redirect_to root_path
+    end
   end
 end
