@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :move_ragular, only: [:edit]
+
   def index
     @items = Item.all.order("created_at DESC")
     @purchases = Purchase.all
@@ -23,10 +25,17 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
     @purchases = Purchase.all
   end
 
+  def update
+    if @item.update(item_params)
+      redirect_to item_path
+    else
+      render :edit
+    end
+  end
+  
   def destroy
     if current_user.id == @item.user_id && @item.destroy
       redirect_to root_path
@@ -43,5 +52,13 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def move_ragular
+    if !(user_signed_in?)
+      redirect_to new_user_session_path
+    elsif current_user.id != @item.user_id
+      redirect_to root_path
+    end
   end
 end
