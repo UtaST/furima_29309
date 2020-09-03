@@ -9,6 +9,8 @@ class PurchasesController < ApplicationController
     @purchase = PurchaseAddress.new(purchase_params)
     if @purchase.save
       redirect_to root_path
+    else
+      render :index
     end
   end
 
