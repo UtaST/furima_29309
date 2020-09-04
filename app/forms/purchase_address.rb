@@ -8,7 +8,7 @@ class PurchaseAddress
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "input correctly"}
     validates :city
     validates :house_number
-    validates :tell_number
+    validates :tell_number, format: { with: /\A[0-9]+\z/, message: "can't include hyphen(-)"}
   end
 
   validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
