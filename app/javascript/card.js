@@ -6,8 +6,6 @@ form.addEventListener("submit", (e) => {
 
   const formResult = document.getElementById("charge-form");
   const formData = new FormData(formResult);
-  console.log(...formData.entries());
-  debugger
 
   const card = {
     number: formData.get("purchase_address[number]"),
