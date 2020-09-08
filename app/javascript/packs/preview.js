@@ -12,9 +12,9 @@ if (document.URL.match( /new/ ) || document.URL.match( /edit/ )) {
     }
 
     document.getElementById('item-image').addEventListener('change', (e) => {
-      const imageContent = document.querySelector('img');
-      if (imageContent){
-        imageContent.remove();
+      const imageContent = document.querySelectorAll('img');
+      if (imageContent[1]){
+        imageContent[1].remove();
       }
       let file = e.target.files[0];
       let blob = window.URL.createObjectURL(file);
