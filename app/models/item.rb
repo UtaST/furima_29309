@@ -16,7 +16,7 @@ class Item < ApplicationRecord
     validates :price
   end
 
-  with_options numericality: { other_than: 0, message: "can't be blank" } do
+  with_options numericality: { other_than: 0, message: "を選択してください" } do
     validates :category_id
     validates :condition_id
     validates :shipping_charge_id
@@ -24,6 +24,6 @@ class Item < ApplicationRecord
     validates :days_until_shipping_id
   end
 
-  validates :price, numericality: { message: "half-width number"}
-  validates :price, numericality: { greater_than_or_equal_to:300, less_than: 10000000, message: "out of setting range" } 
+  validates :price, numericality: { message: "は半角数字で入力してください"}
+  validates :price, numericality: { greater_than_or_equal_to:300, less_than: 10000000, message: "は¥300〜9,999,999でのみ設定可能です" } 
 end
