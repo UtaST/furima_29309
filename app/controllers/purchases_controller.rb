@@ -8,9 +8,10 @@ class PurchasesController < ApplicationController
   end
 
   def create
+    redirect_to new_card_path and return unless current_user.card.present?
     @purchase = PurchaseAddress.new(purchase_params)
     if @purchase.valid?
-      # pay_item
+      pay_item
       @purchase.save
       return redirect_to root_path
     else
@@ -41,12 +42,13 @@ class PurchasesController < ApplicationController
 
   end
 
-  # def pay_item
-  #   Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-  #   Payjp::Charge.create(
-  #     amount: @item.price,
-  #     card: purchase_params[:token],
-  #     currency: 'jpy'
-  #   )
-  # end
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    customer_token = current_user.card.customer_token
+    Payjp::Charge.create(
+      amount: @item.price,
+      customer: customer_token,
+      currency: 'jpy'
+    )
+  end
 end
