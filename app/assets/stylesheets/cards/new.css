@@ -1,0 +1,6 @@
+.flash-messages {
+  display: flex;
+  justify-content: center;
+  font-size: 1.3vw;
+  color: rgb(182, 48, 0);
+}

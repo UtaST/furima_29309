@@ -1,0 +1,19 @@
+<%= render "shared/second-header"%>
+<div class="mypage">
+  <div class="title">マイページ</div>
+  <div class="card">
+    <div class="card-title">クレジットカード情報</div>
+    <div class="card-data">
+      【カード番号】
+      <br>
+      <%= "**** **** **** " + @card[:last4] %>
+      <br>
+      【有効期限】
+      <br>
+      <%= @card[:exp_month] %>
+      /
+      <%= @card[:exp_year] %>
+    </div>
+  </div>
+</div>
+<%= render "shared/second-footer"%>
