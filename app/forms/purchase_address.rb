@@ -1,7 +1,7 @@
 class PurchaseAddress
 
   include ActiveModel::Model
-  attr_accessor  :user_id, :item_id, :postal_code, :prefecture_id, :city, :house_number, :building_name, :tell_number
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :house_number, :building_name, :tell_number
 
   with_options presence: true do
     validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: "を正しく入力してください"}
