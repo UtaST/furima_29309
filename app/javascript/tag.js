@@ -21,10 +21,16 @@ if (location.pathname.match("items/new")){
           childElement.setAttribute('class', 'child' );
 
           parentsElement.appendChild(childElement);
-          childElement.innerHTML = tag.name;
+          childElement.innerHTML = tag.tag_name;
           searchResult.appendChild(parentsElement);
 
           const clickElement = document.getElementById(tag.id);
+          clickElement.addEventListener("mouseover", () => {
+            clickElement.setAttribute("style", "background-color: #dcdcdc;");
+          });
+          clickElement.addEventListener("mouseout", () => {
+            clickElement.removeAttribute("style", "background-color: #dcdcdc;");
+          });
           clickElement.addEventListener("click", () => {
             document.getElementById("item-tag").value = clickElement.textContent;
             clickElement.remove();
