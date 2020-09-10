@@ -1,4 +1,4 @@
-if (location.pathname.match("items/new")){
+if (location.pathname.match("items/new") || location.pathname.match(/items\/\d\/edit/)){
   window.addEventListener("load", (e) => {
     const inputElement = document.getElementById("item-tag");
     inputElement.addEventListener("keyup", (e) => {

@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :destroy]
-  before_action :set_item_tag, only: [:edit, :update]
+  before_action :set_item_tag, only: [:edit]
   before_action :move_ragular, only: [:edit]
 
   def index
@@ -28,6 +28,9 @@ class ItemsController < ApplicationController
 
   def show
     @purchases = Purchase.all
+  end
+
+  def edit
   end
 
   def update
@@ -63,7 +66,9 @@ class ItemsController < ApplicationController
   end
 
   def set_item_tag
-    @item = ItemTag.find(params[:id])
+    item = Item.find(params[:id])
+    tag = item.tags.first
+    @item = ItemTag.new(name: item.name, explanation: item.explanation, category_id: item.category_id, condition_id: item.condition_id, shipping_charge_id: item.shipping_charge_id, prefecture_id: item.prefecture_id, days_until_shipping_id: item.days_until_shipping_id, price: item.price, user_id: item.user_id, tag_name: tag.tag_name)
   end
 
   def move_ragular
