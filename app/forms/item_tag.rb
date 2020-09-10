@@ -1,6 +1,6 @@
 class ItemTag
   include ActiveModel::Model
-  attr_accessor :name, :explanation, :category_id, :condition_id, :shipping_charge_id, :prefecture_id, :days_until_shipping_id, :price, :tag_name
+  attr_accessor :image, :name, :explanation, :category_id, :condition_id, :shipping_charge_id, :prefecture_id, :days_until_shipping_id, :price, :tag_name
 
   with_options presence: true do
     validates :image
