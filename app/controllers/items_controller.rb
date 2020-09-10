@@ -49,7 +49,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item_tag).permit(:image, :name, :explanation, :category_id, :condition_id, :shipping_charge_id, :prefecture_id, :days_until_shipping_id, :price, :tag).merge(user_id: current_user.id)
+    params.require(:item_tag).permit(:image, :name, :explanation, :category_id, :condition_id, :shipping_charge_id, :prefecture_id, :days_until_shipping_id, :price, :tag_name).merge(user_id: current_user.id)
   end
 
   def set_item
@@ -58,6 +58,7 @@ class ItemsController < ApplicationController
 
   def set_item_tag
     @item = ItemTag.find(params[:id])
+  end
 
   def move_ragular
     if !(user_signed_in?)
