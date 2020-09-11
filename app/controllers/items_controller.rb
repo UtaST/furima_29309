@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :destroy]
-  before_action :set_item_tag, only: [:edit]
+  before_action :set_item, only: [:show, :destroy, :edit, :update]
   before_action :move_ragular, only: [:edit]
 
   def index
@@ -17,7 +16,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = ItemTag.new(item_params)
+    @item = ItemTag.new(item_tag_params)
     if @item.valid?
       @item.save
       return redirect_to root_path
@@ -30,12 +29,11 @@ class ItemsController < ApplicationController
     @purchases = Purchase.all
   end
 
-  def edit
-  end
-
   def update
-    if @item.update(item_params)
-      redirect_to item_path
+    binding.pry
+    if @item.valid?
+      @item.update(item_params)
+      return redirect_to item_path
     else
       render :edit
     end
@@ -57,18 +55,16 @@ class ItemsController < ApplicationController
 
   private
 
-  def item_params
+  def item_tag_params
     params.require(:item_tag).permit(:image, :name, :explanation, :category_id, :condition_id, :shipping_charge_id, :prefecture_id, :days_until_shipping_id, :price, :tag_name).merge(user_id: current_user.id)
+  end
+
+  def item_params
+    params.require(:item).permit(:image, :name, :explanation, :category_id, :condition_id, :shipping_charge_id, :prefecture_id, :days_until_shipping_id, :price).merge(user_id: current_user.id)
   end
 
   def set_item
     @item = Item.find(params[:id])
-  end
-
-  def set_item_tag
-    item = Item.find(params[:id])
-    tag = item.tags.first
-    @item = ItemTag.new(name: item.name, explanation: item.explanation, category_id: item.category_id, condition_id: item.condition_id, shipping_charge_id: item.shipping_charge_id, prefecture_id: item.prefecture_id, days_until_shipping_id: item.days_until_shipping_id, price: item.price, user_id: item.user_id, tag_name: tag.tag_name)
   end
 
   def move_ragular

@@ -21,10 +21,9 @@ class ItemTag
   validates :price, numericality: { greater_than_or_equal_to:300, less_than: 10000000, message: "は¥300〜9,999,999でのみ設定可能です" } 
 
   def save
-    item = Item.create(image: image, name: name, explanation: explanation, category_id: category_id, condition_id: condition_id, shipping_charge_id: shipping_charge_id, prefecture_id: prefecture_id, days_until_shipping_id: days_until_shipping_id, price: price, user_id: user_id)
-
-    tag = Tag.where(tag_name: tag_name).first_or_initialize
-    tag.save
+    @item = Item.create(image: image, name: name, explanation: explanation, category_id: category_id, condition_id: condition_id, shipping_charge_id: shipping_charge_id, prefecture_id: prefecture_id, days_until_shipping_id: days_until_shipping_id, price: price, user_id: user_id)
+    @tag = Tag.where(tag_name: tag_name).first_or_initialize
+    @tag.save
 
     ItemTagRelation.create(item_id: item.id, tag_id: tag.id)
   end
