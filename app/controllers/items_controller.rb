@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :destroy, :edit, :update]
   before_action :move_ragular, only: [:edit]
 
   def index
@@ -9,16 +9,17 @@ class ItemsController < ApplicationController
 
   def new
     if user_signed_in?
-      @item = Item.new
+      @item = ItemTag.new
     else
       redirect_to new_user_session_path
     end
   end
 
   def create
-    @item = Item.new(item_params)
-    if @item.save
-      redirect_to root_path
+    @item = ItemTag.new(item_tag_params)
+    if @item.valid?
+      @item.save
+      return redirect_to root_path
     else
       render :new
     end
@@ -29,8 +30,10 @@ class ItemsController < ApplicationController
   end
 
   def update
-    if @item.update(item_params)
-      redirect_to item_path
+    binding.pry
+    if @item.valid?
+      @item.update(item_params)
+      return redirect_to item_path
     else
       render :edit
     end
@@ -44,7 +47,17 @@ class ItemsController < ApplicationController
     end
   end
 
+  def search
+    return nil if params[:input] == ""
+    tag = Tag.where(['tag_name LIKE ?', "%#{params[:input]}%"])
+    render json: { keyword: tag }
+  end
+
   private
+
+  def item_tag_params
+    params.require(:item_tag).permit(:image, :name, :explanation, :category_id, :condition_id, :shipping_charge_id, :prefecture_id, :days_until_shipping_id, :price, :tag_name).merge(user_id: current_user.id)
+  end
 
   def item_params
     params.require(:item).permit(:image, :name, :explanation, :category_id, :condition_id, :shipping_charge_id, :prefecture_id, :days_until_shipping_id, :price).merge(user_id: current_user.id)
