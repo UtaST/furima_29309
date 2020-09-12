@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :search_item, only: [:index, :search_option]
   before_action :set_item, only: [:show, :destroy, :edit, :update]
   before_action :move_ragular, only: [:edit]
 
@@ -53,6 +54,10 @@ class ItemsController < ApplicationController
     render json: { keyword: tag }
   end
 
+  def search_option
+    @results = @i.result.includes(:tag)
+  end
+
   private
 
   def item_tag_params
@@ -74,4 +79,9 @@ class ItemsController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def search_item
+    @i = Item.ransack(params[:q])
+  end
+
 end
