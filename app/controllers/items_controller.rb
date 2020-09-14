@@ -55,7 +55,7 @@ class ItemsController < ApplicationController
   end
 
   def search_option
-    @results = @i.result.includes(:tag)
+    @results = @i.result.includes(:tags)
   end
 
   private
