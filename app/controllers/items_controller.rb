@@ -31,7 +31,6 @@ class ItemsController < ApplicationController
   end
 
   def update
-    binding.pry
     if @item.valid?
       @item.update(item_params)
       return redirect_to item_path
@@ -56,6 +55,7 @@ class ItemsController < ApplicationController
 
   def search_option
     @results = @i.result.includes(:tags)
+    @purchases = Purchase.all
   end
 
   private

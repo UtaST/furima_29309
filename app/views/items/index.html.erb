@@ -127,17 +127,17 @@
     <%# 商品検索 %>
     <h1>商品検索</h1>
     <%= search_form_for @i, url: search_option_items_path do |f| %>
-      <%= f.label :name_eq, '商品名　　' %>
-      <%= f.search_field :name_eq %>
+      <%= f.label :name_cont, '商品名　　' %>
+      <%= f.search_field :name_cont %>
       <br>
       <%= f.label :tags_tag_name_eq, 'タグ　　　' %>
-      <%= f.collection_select :tags_tag_name_eq, Tag.all, :tag_name, :tag_name, include_blank: '---' %>
+      <%= f.collection_select :tags_tag_name_eq, Tag.all, :tag_name, :tag_name, include_blank: '指定なし' %>
       <br>
       <%= f.label :category_id_eq, 'カテゴリー' %>
-      <%= f.collection_select :category_id_eq, Category.all, :name, :name, {} %>
+      <%= f.collection_select :category_id_eq, Category.all, :id, :name, include_blank: '指定なし' %>
       <br>
       <%= f.label :condition_id_eq, '商品の状態' %>
-      <%= f.collection_select :condition_id_eq, Condition.all, :name, :name, {} %>
+      <%= f.collection_select :condition_id_eq, Condition.all, :id, :name, include_blank: '指定なし' %>
       <br>
       <%= f.label :price_eq, '値段' %>
       <%= f.radio_button :price_lteq, '' %>
