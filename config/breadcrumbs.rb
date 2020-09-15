@@ -8,8 +8,13 @@ crumb :users_show do
 end
 
 crumb :new_user_registration do
-  link "新規登録", new_user_registration_path
+  link "会員情報入力", new_user_registration_path
   parent :root
+end
+
+crumb :profiles do
+  link "本人情報入力", profiles_path
+  parent :new_user_registration
 end
 
 crumb :new_user_session do
