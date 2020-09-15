@@ -27,6 +27,11 @@ crumb :new_card do
   parent :root
 end
 
+crumb :search_option_items do
+  link "検索結果", search_option_items_path
+  parent :root
+end
+
 crumb :item do
   link Item.find(params[:id]).name, item_path(params[:id])
   parent :root
