@@ -12,4 +12,12 @@ class User < ApplicationRecord
 
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: "は半角英数字をそれぞれ一文字以上使用してください" }
   validates :nickname, presence: true
+  
+  def self.from_omniauth(auth)
+    sns = SnsCredential.where(provider: auth.provider, uid: auth.uid),first_or_create
+    user = User.where(email: auth.info.email).first_or_initialize(
+      nickname: auth.info.name,
+      email: auth.info.email
+    )
+  end
 end
