@@ -13,6 +13,7 @@
 - has_many :items
 - has_many :purchases
 - has_many :sns_credentials
+- has_many :comments
 - has_one :card
 - has_one :profile
 
@@ -55,6 +56,19 @@
 
 - belongs_to :user
 
+## comments テーブル
+
+| Colu | Type       | Options                        |
+| ---- | ---------- | ------------------------------ |
+| text | string     | null: false                    |
+| user | references | null: false, foreign_key: true |
+| item | references | null: false, foreign_key: true | 
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+
 ## items テーブル
 
 | Column                 | Type       | Options                        |
@@ -75,6 +89,7 @@
 - belongs_to :user
 - has_many :item_tag_relations
 - has_many :tags, through :item_tag_relations
+- has_many :comments
 - has_one :purchase
 
 ## item_tag_relations テーブル
@@ -89,7 +104,7 @@
 - belongs_to :items
 - belongs_to :tags
 
-## item_tag_relations テーブル
+## tags テーブル
 
 | Column     | Type       | Options                        |
 | ---------- | ---------- | ------------------------------ |
