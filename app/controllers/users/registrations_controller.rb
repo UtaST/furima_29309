@@ -6,6 +6,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
+    if params[:sns_auth] == 'true'
+      pass = [*0..9, *'A'..'Z', *'a'..'z'].sample(18)*'' + "0z"
+      binding.pry
+      params[:user][:password] = pass
+      params[:user][:password_confirmation] = pass
+    end
+
     @user = User.new(sign_up_params)
     unless @user.valid?
       render :new and return
