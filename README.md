@@ -60,7 +60,7 @@
 
 | Colu | Type       | Options                        |
 | ---- | ---------- | ------------------------------ |
-| text | string     | null: false                    |
+| text | text       | null: false                    |
 | user | references | null: false, foreign_key: true |
 | item | references | null: false, foreign_key: true | 
 
