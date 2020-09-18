@@ -12,6 +12,8 @@ ja:
         birthday: 生年月日
       card:
         token: カード情報
+      comment:
+        text: テキスト
   activemodel:
     attributes:
       purchase_address:
