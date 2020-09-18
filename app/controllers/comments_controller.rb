@@ -1,5 +1,8 @@
 class CommentsController < ApplicationController
   def create
+    if !(user_signed_in?)
+      redirect_to new_user_session_path and return
+    end
     @comment = Comment.new(comment_params)
     if @comment.save
       ActionCable.server.broadcast 'comment_channel', content: @comment
