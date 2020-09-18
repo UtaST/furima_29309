@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :cards, only: [:new, :create]
   resources :items do
     resources :purchases, only: [:index, :create]
+    resources :comments, only: :create
     collection do
       get 'search'
     end

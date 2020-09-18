@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :items
   has_many :purchases
   has_many :sns_credentials
+  has_many :comments
   has_one :card, dependent: :destroy
   has_one :profile, dependent: :destroy
   

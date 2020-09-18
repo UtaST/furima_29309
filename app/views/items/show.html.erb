@@ -78,12 +78,29 @@
         <span>不適切な商品の通報</span>
       </div>
     </div>
+    <h4 class="comment-all">＜コメント一覧＞</h4>
+    <div  class="comments", id='comments'>
+      <% @comments.reverse_each do |comment| %>
+        <div class="upper-comment">
+          <div class="comment-user">
+            <%= comment.user.nickname %>
+          </div>
+          <div class="comment-date">
+            <%= l comment.created_at %>
+          </div>
+        </div>
+        <div class="lower-comment">
+          <%= comment.text %>
+        </div>
+      <% end %>
+    </div>
   </div>
   <%# /商品の概要 %>
 
   <div class="comment-box">
-    <form>
-      <textarea class="comment-text"></textarea>
+    <%= form_with model: @comment, url: item_comments_path(params[:id]), local: true do |f| %>
+      <%= render 'shared/error_messages', model: @comment %>
+      <%= f.text_area :text, placeholder: "テキストを入力", class: "comment-text", id: 'comment_text' %>
       <p class="comment-warn">
         相手のことを考え丁寧なコメントを心がけましょう。
         <br>
@@ -93,7 +110,7 @@
         <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
         <span>コメントする<span>
       </button>
-    </form>
+    <% end %>
   </div>
   <div class="links">
     <a href="#" class="change-item-btn">

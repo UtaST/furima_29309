@@ -27,3 +27,6 @@ ja:
         city: 市区町村
         house_number: 番地
         tell_number: 電話番号
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
