@@ -10,6 +10,8 @@ ja:
         family_name_kana: 苗字(カナ)
         first_name_kana: 名前(カナ)
         birthday: 生年月日
+      card:
+        token: カード情報
   activemodel:
     attributes:
       purchase_address:
