@@ -11,5 +11,5 @@ function price() {
     addTaxPrice.innerText = selesCommission;
     profit.innerText = selesProfit;
   });
-}
+};
 window.addEventListener('load', price);
