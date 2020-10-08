@@ -143,5 +143,3 @@
 ### Association
 
 - belongs_to :purchase
-
-![](https://i.gyazo.com/64d9eb9823b46a29d562ffd207225055.png "")
